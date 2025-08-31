@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人工具集 - 主控制台</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ 个人工具集控制台</h1>
+            <p class="subtitle">一站式访问所有实用工具</p>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="🔍 搜索工具..." autocomplete="off">
+            <div class="filter-tags">
+                <button class="tag-btn active" data-category="all">全部</button>
+                <button class="tag-btn" data-category="design">设计</button>
+                <button class="tag-btn" data-category="productivity">效率</button>
+                <button class="tag-btn" data-category="development">开发</button>
+                <button class="tag-btn" data-category="utility">实用</button>
+            </div>
+        </div>
+
+        <main class="tools-grid" id="toolsGrid">
+            <!-- 工具卡片将通过JavaScript动态生成 -->
+        </main>
+
+        <footer>
+            <div class="stats">
+                <span id="totalTools">0</span> 个工具可用
+                <span class="separator">|</span>
+                <span id="lastUpdated">刚刚更新</span>
+            </div>
+            <div class="actions">
+                <button id="addToolBtn" class="btn-secondary">➕ 添加新工具</button>
+                <button id="settingsBtn" class="btn-secondary">⚙️ 设置</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 添加工具模态框 -->
+    <div id="addToolModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>➕ 添加新工具</h2>
+            <form id="addToolForm">
+                <div class="form-group">
+                    <label>工具名称 *</label>
+                    <input type="text" id="toolName" required maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label>访问路径 *</label>
+                    <input type="text" id="toolPath" required placeholder="tools/工具名/index.html">
+                </div>
+                <div class="form-group">
+                    <label>图标 *</label>
+                    <input type="text" id="toolIcon" required maxlength="10" placeholder="🎨">
+                </div>
+                <div class="form-group">
+                    <label>分类 *</label>
+                    <select id="toolCategory" required>
+                        <option value="design">设计</option>
+                        <option value="productivity">效率</option>
+                        <option value="development">开发</option>
+                        <option value="utility">实用</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>描述</label>
+                    <textarea id="toolDescription" maxlength="200" placeholder="简要描述工具功能..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">添加工具</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 设置模态框 -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>⚙️ 设置</h2>
+            <div class="settings-section">
+                <h3>外观设置</h3>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                    深色模式
+                </label>
+            </div>
+            <div class="settings-section">
+                <h3>数据管理</h3>
+                <button id="exportData" class="btn-secondary">📤 导出配置</button>
+                <button id="importData" class="btn-secondary">📥 导入配置</button>
+                <button id="resetData" class="btn-danger">🗑️ 重置数据</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

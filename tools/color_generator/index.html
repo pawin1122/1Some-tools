@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>颜色生成器</h1>
+        <p>选择四个主色调，自动生成CSS颜色变量</p>
+
+        <div class="color-selection">
+            <div class="color-group">
+                <label for="color1">主色 1:</label>
+                <input type="color" id="color1" value="#3498db" class="color-picker">
+                <input type="text" id="color1-code" value="#3498db" class="color-code">
+            </div>
+
+            <div class="color-group">
+                <label for="color2">主色 2:</label>
+                <input type="color" id="color2" value="#2ecc71" class="color-picker">
+                <input type="text" id="color2-code" value="#2ecc71" class="color-code">
+            </div>
+
+            <div class="color-group">
+                <label for="color3">主色 3:</label>
+                <input type="color" id="color3" value="#e74c3c" class="color-picker">
+                <input type="text" id="color3-code" value="#e74c3c" class="color-code">
+            </div>
+
+            <div class="color-group">
+                <label for="color4">主色 4:</label>
+                <input type="color" id="color4" value="#f39c12" class="color-picker">
+                <input type="text" id="color4-code" value="#f39c12" class="color-code">
+            </div>
+        </div>
+
+        <button id="generate-btn">生成CSS</button>
+
+        <div class="output-section">
+            <h2>生成的CSS:</h2>
+            <pre id="css-output"></pre>
+            <button id="copy-btn">复制CSS</button>
+        </div>
+
+        <div class="preview-section">
+            <h2>颜色预览:</h2>
+            <div class="color-previews">
+                <div class="color-preview" id="preview1"></div>
+                <div class="color-preview" id="preview2"></div>
+                <div class="color-preview" id="preview3"></div>
+                <div class="color-preview" id="preview4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

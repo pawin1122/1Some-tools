@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage书签生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Homepage书签生成器</h1>
+        <p class="description">输入链接和分类，自动生成符合homepage格式的书签配置</p>
+        
+        <div class="form-section">
+            <h2>添加新书签</h2>
+            <div class="form-group">
+                <label for="bookmarkUrl">链接地址:</label>
+                <textarea id="bookmarkUrl" placeholder="输入单个链接或批量链接（每行一个）
+https://example1.com
+https://example2.com" rows="3" required></textarea>
+                <small style="color: #666; margin-top: 4px;">
+                    💡 操作提示：<br>
+                    • 单行模式：按Enter直接添加<br>
+                    • 批量模式：Enter换行，Shift+Enter也可换行<br>
+                    • 批量模式需点击"添加书签"按钮提交
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label for="bookmarkCategory">所属分类:</label>
+                <input type="text" id="bookmarkCategory" placeholder="例如: 开发工具" value="未整理">
+                <small style="color: #666;">留空将自动归类到"未整理"</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="customTitle">自定义标题 (可选):</label>
+                <input type="text" id="customTitle" placeholder="留空将自动获取网页标题">
+                <small style="color: #666;">批量添加时，此选项将应用于所有链接</small>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="batchMode" checked> 批量处理模式
+                </label>
+                <small style="color: #666;">启用后，每行链接将单独处理</small>
+            </div>
+            
+            <button onclick="addBookmark()" class="btn-primary">添加书签</button>
+        </div>
+
+        <div class="preview-section">
+            <h2>书签预览</h2>
+            <div class="preview-controls">
+                <button onclick="bookmarkManager.toggleSortMode()" class="btn-secondary" id="sortToggle">启用拖拽排序</button>
+                <small style="color: #666;">拖拽书签卡片可调整顺序</small>
+            </div>
+            <div id="bookmarksPreview" class="bookmarks-grid"></div>
+        </div>
+
+        <div class="output-section">
+            <h2>YAML配置输出</h2>
+            <div class="output-controls">
+                <button onclick="generateYAML()" class="btn-secondary">生成YAML</button>
+                <button onclick="copyYAML()" class="btn-secondary">复制配置</button>
+                <button onclick="downloadYAML()" class="btn-secondary">下载文件</button>
+                <button onclick="clearAll()" class="btn-danger">清空所有</button>
+            </div>
+            <textarea id="yamlOutput" readonly></textarea>
+        </div>
+
+        <div class="logs-section">
+            <h2>处理日志</h2>
+            <div id="logs" class="logs"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

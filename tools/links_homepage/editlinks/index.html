@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage书签编辑器 - YAML解析工具</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Homepage书签编辑器</h1>
+            <p>从YAML代码反向解析并可视化编辑书签</p>
+        </header>
+
+        <div class="input-section">
+            <div class="input-header">
+                <h3>📝 输入YAML配置</h3>
+                <button onclick="yamlParser.loadSampleData()" class="btn-secondary">加载示例</button>
+            </div>
+            <textarea id="yamlInput" placeholder="粘贴您的homepage bookmarks YAML配置...
+
+示例格式：
+- Developer:
+    - Github:
+        - abbr: GH
+          href: https://github.com
+          description: 代码托管平台
+    - Stack Overflow:
+        - abbr: SO
+          href: https://stackoverflow.com
+          description: 程序员问答社区
+
+- Entertainment:
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com
+          description: 视频分享平台"></textarea>
+            <button onclick="yamlParser.parseYAML()" class="btn-primary">解析YAML</button>
+        </div>
+
+        <div id="previewSection" class="preview-section" style="display: none;">
+            <div class="preview-header">
+                <h3>🎨 可视化编辑</h3>
+                <div class="actions">
+                    <button onclick="bookmarkEditor.exportYAML()" class="btn-success">导出YAML</button>
+                    <button onclick="bookmarkEditor.exportToFile()" class="btn-info">下载文件</button>
+                    <button onclick="bookmarkEditor.resetChanges()" class="btn-warning">重置更改</button>
+                </div>
+            </div>
+            
+            <div id="categoriesContainer" class="categories-container">
+                <!-- 动态生成的类别和书签 -->
+            </div>
+        </div>
+
+        <div id="outputSection" class="output-section">
+            <div class="output-header">
+                <h3>📤 更新后的YAML</h3>
+                <div class="actions">
+                    <button onclick="bookmarkEditor.deduplicateBookmarks()" class="btn-warning">🔄 排重</button>
+                    <button onclick="yamlParser.copyToClipboard()" class="btn-primary">复制到剪贴板</button>
+                </div>
+            </div>
+            <pre id="yamlOutput"># 暂无数据，请先解析YAML配置</pre>
+        </div>
+    </div>
+
+    <!-- 编辑模态框 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="modal.close()">&times;</span>
+            <h3>✏️ 编辑书签</h3>
+            <form id="editForm">
+                <div class="form-group">
+                    <label>名称:</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label>缩写:</label>
+                    <input type="text" id="editAbbr" maxlength="5" placeholder="自动从域名生成">
+                </div>
+                <div class="form-group">
+                    <label>URL:</label>
+                    <input type="url" id="editUrl" required>
+                </div>
+                <div class="form-group">
+                    <label>描述:</label>
+                    <textarea id="editDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>图标URL:</label>
+                    <input type="url" id="editIcon" placeholder="https://example.com/icon.png">
+                    <img id="iconPreview" style="display: none; width: 32px; height: 32px; margin-left: 10px;">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">保存</button>
+                    <button type="button" onclick="modal.close()" class="btn-secondary">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
