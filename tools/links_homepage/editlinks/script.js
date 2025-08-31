@@ -665,6 +665,18 @@ class Modal {
         
         this.modal.style.display = 'block';
         document.getElementById('editName').focus();
+        
+        // 确保模态框在小屏幕上正确显示
+        this.adjustModalPosition();
+    }
+
+    adjustModalPosition() {
+        const modalContent = this.modal.querySelector('.modal-content');
+        if (window.innerHeight <= 500) {
+            modalContent.style.margin = '5px auto';
+        } else if (window.innerHeight <= 700) {
+            modalContent.style.margin = '10px auto';
+        }
     }
 
     close() {
@@ -740,6 +752,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.modal.style.display === 'block') {
             modal.close();
+        }
+    });
+
+    // 窗口大小改变时调整模态框位置
+    window.addEventListener('resize', function() {
+        if (modal.modal.style.display === 'block') {
+            modal.adjustModalPosition();
         }
     });
 });
